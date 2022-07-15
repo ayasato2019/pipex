@@ -6,69 +6,74 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:11:01 by aysato            #+#    #+#             */
-/*   Updated: 2022/07/14 17:03:38 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/15 17:38:56 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include <ctype.h>
-	#include <stdlib.h>
-   	#include <unistd.h>     /* pipe() */
-   	#include <sys/types.h>  /* pid_t */
-	
-	extern  void parent( int fildes[2] );
-	extern  void child( int fildes[2] );	
-	int main()
+#include "../include/ft_pipex.h"
+
+void	perror_message(char *parts)
+{
+		perror("%s", parts);
+		close(infile);
+		_exit(EXIT_FAILURE);
+}
+
+void	chiled_process(int argc, char *envp[], int *infile)
+{
+	int outfile;
+	int fd_judge;
+
+	fd_judge = 0;
+	infile = open(argv[1], O_RDONLY, 0777);
+	if (infile == -1)
 	{
-	    int fildes[2] ;
-	    pid_t pid ;
-	
-	        if( pipe(fildes) == -1)
-	        {
-	            perror("pipe");
-	            exit( 1 );
-	        }
-	        /* fildes[0] -- 読み込み用
-	         * fildes[1] -- 書き込み用	         */
-	        if( (pid=fork()) == 0 )
-	        {
-	            child( fildes );
-	            exit( 0 );
-        }
-	        else if( pid > 0 )
-	        {
-	            parent( fildes );
-	            wait( 0 );
-	        }
-	        else
-	        {
-	            perror("fork");
-	            exit( 1 );
-	        }
+		perror("chiled_prrocess : fd_infile read");
+		_exit(EXIT_FAILURE);
 	}
-	
-	void parent( int fildes[2] )
+	fd_judge = dup2(fd, 1);
+	if (fd_judge > 0)
 	{
-	    char *p, c ;
-	        close( fildes[0] );
-	        p = "hello,world\n" ;
-	        while( *p )
-	        {
-	            c = *p ++ ;
-	            write( fildes[1],&c,1 );
-	        }
-	        close( fildes[1] );
+		perror("dup2 file1");
+		close(infile);
+		_exit(EXIT_FAILURE);
 	}
-	
-	void child( int fildes[2] )
+	fd_judge = dup2(outfile, 0);
+	if (fd_judge > 0)
 	{
-	    char c, c2 ;
-	        close( fildes[1] );
-	        while( read(fildes[0],&c,1) >0 )
-	        {
-	            c2 = toupper(c);
-	            write( 1, &c2, 1 );
-	        }
-	        close( fildes[0] );
-  	}
+		perror("dup2 file1");
+		close(outfile);
+		_exit(EXIT_FAILURE);
+	}
+	close(infile);
+	
+}
+
+int main()
+{
+    int fd[2];
+    pid_t pid;
+
+    if (argc != 5)
+    {/*引数が正しくない旨のコメントを表示させる*/
+        perror("Bad arguments");
+        return 0;
+    }
+    if (pipe(fd) == -1)
+    {/*pipeの作成が失敗したら*/
+        perror("pipe"); 
+        exit (1);
+    }
+    pid = fork();
+    if (pid == -1)
+    {/*forkに失敗*/
+        perror("fork");
+        exit (1);
+    }    
+    else if (pid == 0)
+    {/* forkに成功し、子プロセスとして動く */
+        chiled_process(argv, envp, fd);
+        exit(0);
+    }
+	/* forkに成功し、親プロセスに返される（数値は子プロセスのプロセスID） */
+}
