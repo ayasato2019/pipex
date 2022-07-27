@@ -1,6 +1,7 @@
 NAME = pipex
 
-SRCS =	./src/pipex.c
+SRCS =	./src/pipex.c \
+	./src/set_cmd.c
 
 LIBFT = ./libft/libft.a
 

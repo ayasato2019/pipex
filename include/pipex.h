@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:16:23 by aysato            #+#    #+#             */
-/*   Updated: 2022/07/24 09:54:37 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:52:35 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "libft.h"
+// # include "../libft/libft.h"  
 
-char	*get_filepath(char **envp);
+char	**get_filepath(char **envp);
+char	**get_command(char **argv);
 void	child_process(char **argv, char **envp, int *fd);
 void	parent_process(char **argv, char **envp, int *fd);
 int		main (int argc, char **argv, char **envp);
