@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:11:01 by aysato            #+#    #+#             */
-/*   Updated: 2022/07/27 14:47:01 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/27 15:29:11 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	child_process(char **argv, char **envp, int *fd)
 	int	fd_infile;
 	int	i;
 	char    **cmd;
+	char    **filepath;
 
 	i = 0;
 	fd_infile = open(argv[1], O_RDONLY, 0777);
@@ -25,25 +26,22 @@ void	child_process(char **argv, char **envp, int *fd)
 	if (dup2(fd_infile, STDIN_FILENO) == -1)
 		set_perror("child process infile dup", EXIT_FAILURE);
 	close(fd[0]);
-	// printf("%d\n", fd_infile);
-	close(fd_infile);
+	// close(fd_infile);
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
 		set_perror("child process fd[1] dup", EXIT_FAILURE);
-	close(fd[1]);
+	// close(fd[1]);
 	cmd = get_command(&argv[2]);
-	envp = get_filepath(envp);
-	// printf("%d\n", fd_infile);
-	// execve("./", cmd, envp);
-	// while(envp[i])
-	// {
-	// 	execve("./", cmd, envp);
-	// 	i++;
-	// }
-	if (execve("./", cmd, envp) == -1)
+	filepath = get_filepath(envp);
+	while(filepath[i])
 	{
-		perror("child process execve");
-		_exit(EXIT_FAILURE);
+		execve(ft_strjoin(filepath[i], *cmd), cmd, envp);
+		i++;
 	}
+	// if (execve("/bin/cat", "cat", envp) == -1)
+	// {
+	// }
+	perror("child process execve");
+	_exit(EXIT_FAILURE);
 }
 
 void	parent_process(char **argv, char **envp, int *fd)
@@ -51,6 +49,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 	int	fd_outfile;
 	int	i;
 	char    **cmd;
+	char    **filepath;
 
 	i = 0;
 	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
@@ -60,20 +59,20 @@ void	parent_process(char **argv, char **envp, int *fd)
 		set_perror("parent process outfile dup", EXIT_FAILURE);
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		set_perror("parent process fd[0] dup", EXIT_FAILURE);
-	close(fd_outfile);
+	// close(fd_outfile);
 	close(fd[0]);
 	cmd = get_command(&argv[3]);
-	envp = get_filepath(envp);
-	// while(envp[i])
-	// {
-	// 	execve(envp[i], cmd, envp);
-	// 	i++;
-	// }
-	if (execve("./", cmd, envp) == -1)
+	filepath = get_filepath(envp);
+	while(filepath[i])
 	{
-		set_perror("parent process execve", EXIT_FAILURE);
-		exit(EXIT_FAILURE);
+		execve(ft_strjoin(filepath[i], *cmd), cmd, envp);
+		i++;
 	}
+	// if (execve("/usr/bin/wc", "wc", envp) == -1)
+	// {
+	// }
+	set_perror("parent process execve", EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv, char **envp)
