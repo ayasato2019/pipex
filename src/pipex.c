@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:11:01 by aysato            #+#    #+#             */
-/*   Updated: 2022/07/28 09:34:55 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/28 09:58:00 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	child_process(char **argv, char **envp, int *fd)
 {
 	int		fd_infile;
 	int		i;
-	char    **cmd;
-	char    **filepath;
+	char	**cmd;
+	char	**filepath;
 
 	i = 0;
 	fd_infile = open(argv[1], O_RDONLY, 0777);
@@ -32,7 +32,7 @@ void	child_process(char **argv, char **envp, int *fd)
 	close(fd[0]);
 	cmd = get_command(&argv[2]);
 	filepath = get_filepath(envp);
-	while(filepath[i])
+	while (filepath[i])
 	{
 		execve(ft_strjoin(filepath[i], *cmd), cmd, envp);
 		i++;
@@ -41,10 +41,10 @@ void	child_process(char **argv, char **envp, int *fd)
 
 void	parent_process(char **argv, char **envp, int *fd)
 {
-	int	fd_outfile;
-	int	i;
-	char    **cmd;
-	char    **filepath;
+	int		fd_outfile;
+	int		i;
+	char	**cmd;
+	char	**filepath;
 
 	i = 0;
 	fd_outfile = open(argv[4], O_WRONLY | O_CREAT, 0644);
@@ -59,7 +59,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 	close(fd[0]);
 	cmd = get_command(&argv[3]);
 	filepath = get_filepath(envp);
-	while(filepath[i])
+	while (filepath[i])
 	{
 		execve(ft_strjoin(filepath[i], *cmd), cmd, envp);
 		i++;
