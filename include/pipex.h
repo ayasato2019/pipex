@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:16:23 by aysato            #+#    #+#             */
-/*   Updated: 2022/07/27 15:29:43 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/28 09:49:06 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "libft.h"
-// # include "../libft/libft.h"  
+# include "libft.h" 
 
 char	**get_filepath(char **envp);
 char	**get_command(char **argv);

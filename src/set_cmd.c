@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/07/27 15:31:06 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/28 09:48:58 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,3 @@ char	**get_command(char **argv)
 	}
 	return (cmd);
 }
-
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	int     i;
-// 	char    **cmd;
-// 	char    **filepath;
-	
-// 	i = 0;
-// 	if (!argc)
-// 		return 0;
-// 	cmd = get_command(&argv[1]);
-// 	filepath = get_filepath(envp);
-// 	i = 0;
-// 	while(filepath[i])
-// 	{
-// 		printf("envp: %s\n", ft_strjoin(filepath[i], *cmd));
-// 		execve(ft_strjoin(filepath[i], *cmd), cmd, envp);
-// 		i++;
-// 	}
-// 	printf("error");
-// 	exit(EXIT_FAILURE);
-// 	return (0);
-// }
