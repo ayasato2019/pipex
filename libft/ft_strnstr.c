@@ -6,13 +6,11 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:59:16 by aysato            #+#    #+#             */
-/*   Updated: 2022/07/21 15:37:52 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/28 10:09:05 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
