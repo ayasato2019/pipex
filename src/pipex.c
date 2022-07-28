@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:11:01 by aysato            #+#    #+#             */
-/*   Updated: 2022/07/28 21:53:30 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/28 22:40:35 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	child_process(char **argv, char **envp, int *fd)
 {
 	int		fd_infile;
-	int		i;
+	size_t	i;
 	char	**cmd;
 	char	**filepath;
 
@@ -37,12 +37,13 @@ void	child_process(char **argv, char **envp, int *fd)
 		execve(ft_strjoin(filepath[i], *cmd), cmd, envp);
 		i++;
 	}
+	set_exit(cmd, filepath, EXIT_FAILURE);
 }
 
 void	parent_process(char **argv, char **envp, int *fd)
 {
 	int		fd_outfile;
-	int		i;
+	size_t	i;
 	char	**cmd;
 	char	**filepath;
 
@@ -64,7 +65,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 		execve(ft_strjoin(filepath[i], *cmd), cmd, envp);
 		i++;
 	}
-	set_exit(cmd, filepath);
+	set_exit(cmd, filepath, EXIT_FAILURE);
 }
 
 int	main(int argc, char **argv, char **envp)

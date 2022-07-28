@@ -1,12 +1,16 @@
 NAME = pipex
 
 SRCS =	./src/pipex.c \
-	./src/set_cmd.c\
+	./src/set_cmd.c \
 	./src/set_perror_exit.c
 
 LIBFT = ./libft/libft.a
 
 LIBFT_DIR = ./libft
+
+PRINTF = ./printf/printf.a
+
+PRINTF_DIR = ./printf
 
 OBJS = ${SRCS:.c=.o}
 
@@ -17,30 +21,33 @@ RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
 HEADER = ./include \
-	./libft
+	./libft \
+	./printf/include
 
 all:	${NAME}
 
-${NAME}: ${HEADER} ${LIBFT} ${OBJS}
-		$(CC) ${CFLAGS} ${LIBFT} ${OBJS} -o ${NAME}
+${NAME}: ${HEADER} ${LIBFT} ${PRINTF} ${OBJS}
+	$(CC) ${CFLAGS} ${LIBFT} ${PRINTF} ${OBJS} -o ${NAME}
 
 ${LIBFT}:
-		make -C ${LIBFT_DIR}
+	make -C ${LIBFT_DIR}
+
+${PRINTF}:
+	make -C ${PRINTF_DIR}
 
 .c.o:
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I${LIBFT_DIR}
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${LIBFT_DIR} ${PTINTF_DIR}
 
 clean:
-		${MAKE} -C ${LIBFT_DIR} clean
-		$(RM) $(OBJS)
-		$(RM) ${NAME}
-		$(RM) ${LIBFT}
+	${MAKE} -C ${LIBFT_DIR} -C ${PRINTF} clean
+	$(RM) $(OBJS)
+	$(RM) ${NAME}
+	$(RM) ${LIBFT}
+	$(RM) ${PRINTF}
 
 fclean:	clean
-		${MAKE} -C ${LIBFT_DIR} fclean
-		$(RM) ${NAME}
-		$(RM) ${NAME}
-		$(RM) ${LIBFT}
+	${MAKE} -C ${LIBFT_DIR} fclean
+
 
 re:		fclean all
 

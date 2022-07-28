@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/07/28 21:39:59 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:39:06 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	**get_filepath(char **envp)
 {
 	char	**filepath;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (ft_strncmp(*envp, "PATH=", 5))
@@ -38,7 +38,7 @@ char	**get_command(char **argv)
 	cmd = ft_split((*argv), ' ');
 	if (!cmd)
 	{
-		printf("error");
+		set_perror("error");
 		return (NULL);
 	}
 	return (cmd);
