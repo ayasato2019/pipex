@@ -6,17 +6,11 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/07/28 09:57:37 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:39:59 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
-
-void	set_perror(char *cmt, int status)
-{
-	perror(cmt);
-	exit(status);
-}
 
 char	**get_filepath(char **envp)
 {

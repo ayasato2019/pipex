@@ -1,0 +1,218 @@
+================================================================
+                     Norminette check
+================================================================
+[OK]
+
+================================================================
+          Test 1 >> Forbidden function check
+================================================================
+printf
+yld_stub_binder
+[KO]
+
+================================================================
+             Test 2 >> Check the executable
+                Executable name is pipex
+================================================================
+[OK]
+
+================================================================
+        Test 3 >> Invalid number of arguments
+                    ./pipex infile
+================================================================
+<
+Bad arguments: Undefined error: 0
+
+================================================================
+        Test 4 >> Invalid number of arguments
+ ./pipex infile "cat -e" "grep $" "wc -l" output/outfile4
+================================================================
+<
+Bad arguments: Undefined error: 0
+
+[OK]
+
+================================================================
+                Test 5 >> Invalid infile
+     ./pipex file1 "cat" "grep x" output/outfile5
+================================================================
+<
+child process infile open: No such file or directory
+
+>
+./test.sh: line 120: file1: No such file or directory
+
+exit code [OK]
+cmd output [OK]
+
+================================================================
+              Test 6 >> Infile bad permission
+       ./pipex infile "cat" "cat -e" output/outfile6
+================================================================
+<
+child process infile open: Permission denied
+
+>
+./test.sh: line 159: infile: Permission denied
+
+exit code [OK]
+cmd output [OK]
+
+================================================================
+              Test 7 >> Outfile bad permission
+    ./pipex infile "grep pipex" "wc -lw" output/outfile7
+================================================================
+<
+outfile fd: Permission denied
+
+>
+./test.sh: line 203: output/outfile7-orig: Permission denied
+
+exit code [OK]
+cmd output [OK]
+
+================================================================
+                Test 8 >> Invalid command 1
+      ./pipex infile "catzado" "wc -w" output/outfile8
+================================================================
+<
+
+>
+./test.sh: line 249: catzado: command not found
+
+exit code [OK]
+cmd output [OK]
+
+================================================================
+                Test 9 >> Invalid command 2
+   ./pipex infile "cat" "trzero a b" output/outfile9
+================================================================
+<
+
+>
+./test.sh: line 287: trzero: command not found
+
+< 0
+> 127
+exit code [KO]
+cmd output [OK]
+
+================================================================
+               Test 10 >> Both invalid commands
+       ./pipex infile "ls-l" "grepzao x" output/outfile10 
+================================================================
+<
+
+>
+./test.sh: line 325: ls-l: command not found
+./test.sh: line 325: grepzao: command not found
+
+< 0
+> 127
+exit code [KO]
+cmd output [OK]
+
+================================================================
+                Test 11 >> Valid commands
+     ./pipex infile "grep d" "cat -e" output/outfile11
+================================================================
+<
+
+>
+
+exit code [OK]
+cmd output [OK]
+
+================================================================
+                Test 12 >> Valid commands
+./pipex /dev/urandom "head -n 10" "wc -l" output/outfile12
+================================================================
+<
+
+>
+
+exit code [OK]
+cmd output [OK]
+
+================================================================
+                Test 13 >> Valid commands
+  ./pipex infile "cat" "tr [a-z] [A-Z]" output/outfile13
+================================================================
+<
+
+>
+
+exit code [OK]
+cmd output [OK]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                   >>>>>> Extra Tests <<<<<<
+             Kudos if you handled these situations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+================================================================
+                Test 14 >> Valid commands
+ ./pipex infile "grep pipex" "tr x ' '" output/outfile14
+================================================================
+<
+usage: tr [-Ccsu] string1 string2
+       tr [-Ccu] -d string1
+       tr [-Ccu] -s string1
+       tr [-Ccu] -ds string1 string2
+
+>
+
+< 1
+> 0
+exit code [KO]
+0a1
+> -rw r- r-    1 aysato  2020  13844 Jul 28 16:53 pipe 
+cmd output [KO]
+
+================================================================
+                Test 15 >> Valid commands
+ ./pipex infile "echo 'Hi 42'" "tr 42 FT" output/outfile15
+================================================================
+<
+
+>
+
+exit code [OK]
+1c1
+< 'Hi FT'
+---
+> Hi FT
+cmd output [KO]
+
+================================================================
+                Test 16 >> Valid commands
+ ./pipex infile "tr ex ' X'" "tr pi 'P '" output/outfile16
+================================================================
+<
+usage: tr [-Ccsu] string1 string2
+       tr [-Ccu] -d string1
+       tr [-Ccu] -s string1
+       tr [-Ccu] -ds string1 string2
+usage: tr [-Ccsu] string1 string2
+       tr [-Ccu] -d string1
+       tr [-Ccu] -s string1
+       tr [-Ccu] -ds string1 string2
+
+>
+
+< 1
+> 0
+exit code [KO]
+0a1,11
+> total 96
+> drwXr-Xr-X  10 aysato  2020    320 Jul 28 16:53 .
+> drwXr-Xr-X  11 aysato  2020    352 Jul 28 16:53 ..
+> drwXr-Xr-X  12 aysato  2020    384 Jul 28 16:53 .g t
+> -rw-r--r--   1 aysato  2020    160 Jul 28 16:53 Mak f l 
+> -rw-r--r--   1 aysato  2020    176 Jul 28 16:53 README.md
+> -rw-r--r--   1 aysato  2020    108 Jul 28 16:53 fn_allow d
+> -rw-r--r--   1 aysato  2020      0 Jul 28 16:53  nf l 
+> drwXr-Xr-X   2 aysato  2020     64 Jul 28 16:53 outPut
+> -rwXr-Xr-X   1 aysato  2020  13844 Jul 28 16:53 P P X
+> -rwXr-Xr-X   1 aysato  2020  18826 Jul 28 16:53 t st.sh
+cmd output [KO]
