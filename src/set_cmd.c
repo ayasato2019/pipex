@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/03 12:33:12 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:07:44 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*check_filepath(char **filepath, char *cmd)
 			set_perror("malloc", EXIT_FAILURE);
 		i++;
 	}
-	return ("-1");
+	return (ft_strdup("-1"));
 }
 
 char	**get_filepath(char **envp)

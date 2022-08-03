@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:38:49 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/03 12:22:58 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:08:27 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	set_free(char ***dst, char *src)
 	if (*dst == NULL)
 		return ;
 	i = 0;
-	while (dst[i] != NULL)
+	while (dst[0][i] != NULL)
 	{
 		free((*dst)[i]);
 		i++;
