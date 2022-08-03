@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:47:39 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/01 09:59:56 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:40:37 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ static char	**ft_free(char **container)
 }
 
 static char	**split_block(char const *s,
-		char c, char **container)
+		char c, const char *temp, char **container)
 {
 	size_t	len;
 	size_t	i;
-	const char	*temp;
 
 	i = 0;
 	while (*s)
@@ -75,6 +74,7 @@ static char	**split_block(char const *s,
 
 char	**ft_split(char const *s, char c)
 {
+	const char	*temp;
 	char		**container;
 
 	if (s == NULL)
@@ -82,5 +82,5 @@ char	**ft_split(char const *s, char c)
 	container = (char **)malloc((sizeof(char *) * (ft_count_block(s, c)) + 1));
 	if (container == NULL)
 		return (NULL);
-	return (split_block(s, c,container));
+	return (split_block(s, c, temp, container));
 }

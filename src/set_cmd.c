@@ -6,15 +6,14 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/02 09:15:07 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:33:12 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-int		get_status(char *file)
+int	get_status(char *file)
 {
-	
 	if (access(file, X_OK) == 0)
 		return (0);
 	if (access(file, F_OK) == 0)
@@ -24,7 +23,7 @@ int		get_status(char *file)
 
 char	*check_filepath(char **filepath, char *cmd)
 {
-	char 	*temp;
+	char	*temp;
 	size_t	i;
 
 	i = 0;
@@ -75,7 +74,6 @@ char	**get_command(char **argv)
 		set_perror("error", EXIT_FAILURE);
 	return (cmd);
 }
-
 
 /*int	main(int argc, char **argv, char **envp)
 {

@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:38:49 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/02 11:39:05 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:22:58 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_free(char ***dst, char *src)
 	size_t	i;
 
 	if (*dst == NULL)
-		return;
+		return ;
 	i = 0;
 	while (dst[i] != NULL)
 	{
@@ -31,7 +31,7 @@ void	set_free(char ***dst, char *src)
 void	ft_free(char **dst, char *src)
 {
 	if (*dst == NULL)
-		return;
+		return ;
 	free(*dst);
 	*dst = src;
 }
@@ -45,7 +45,7 @@ void	set_perror(char *cmt, int status)
 void	set_perror_allfree(int status, char **cnt,
 			char **cnt2, char *cnt3)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	perror("execve");
