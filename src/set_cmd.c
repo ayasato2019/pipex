@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/03 17:07:44 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/09 09:43:03 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*check_filepath(char **filepath, char *cmd)
 	return (ft_strdup("-1"));
 }
 
-char	**get_filepath(char **envp)
+char	**get_filepath(char **envp, char **cmd)
 {
 	char	**filepath;
 	char	*temp;
@@ -57,6 +57,8 @@ char	**get_filepath(char **envp)
 	{
 		temp = filepath[i];
 		filepath[i] = ft_strjoin(filepath[i], "/");
+		if (filepath[i] == NULL)
+			set_perror_allfree(EXIT_FAILURE, cmd, filepath, NULL);
 		free(temp);
 		if (filepath[i] == NULL)
 			set_perror("malloc", EXIT_FAILURE);

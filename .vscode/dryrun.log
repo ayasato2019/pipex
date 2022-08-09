@@ -1,6 +1,7 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/satouaya/42Tokyo/42/Pipex/github'
 make -C ./libft
+ 
 cc -Wall -Wextra -Werror -c src/pipex.c -o src/pipex.o -I./libft
 cc -Wall -Wextra -Werror -c src/set_cmd.c -o src/set_cmd.o -I./libft
 cc -Wall -Wextra -Werror -c src/set_perror_exit.c -o src/set_perror_exit.o -I./libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aysato <aysato@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2022/01/29 23:14:25 by aysato           ###   ########.fr       */
+/*   Created: 2022/08/09 09:14:51 by satouaya          #+#    #+#             */
+/*   Updated: 2022/08/09 09:14:55 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

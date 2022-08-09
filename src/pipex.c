@@ -6,22 +6,31 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:11:01 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/02 11:40:56 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/09 10:01:49 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+
+void	make_cmd_filepath(char **envp, char **cmd)
+{
+	char	**filepath;
+	char	*cmd_filepath;
+
+	filepath = get_filepath(envp, cmd);
+	cmd_filepath = check_filepath(filepath, cmd[0]);
+	if (execve(cmd_filepath, cmd, envp) == -1)
+		set_perror_allfree(EXIT_FAILURE, cmd, filepath, cmd_filepath);
+}
 
 void	child_process(char **argv, char **envp, int *fd)
 {
 	int		fd_infile;
 	int		i;
 	char	**cmd;
-	char	**filepath;
-	char	*cmd_filepath;
 
 	i = 0;
-	fd_infile = open(argv[1], O_RDONLY, 0777);
+	fd_infile = open(argv[1], O_RDONLY);
 	if (fd_infile == -1)
 		set_perror("child process infile open", EXIT_FAILURE);
 	if (dup2(fd_infile, STDIN_FILENO) == -1)
@@ -32,12 +41,7 @@ void	child_process(char **argv, char **envp, int *fd)
 	close(fd[1]);
 	close(fd[0]);
 	cmd = get_command(&argv[2]);
-	filepath = get_filepath(envp);
-	if (filepath == NULL)
-		set_perror_allfree(EXIT_FAILURE, cmd, filepath, NULL);
-	cmd_filepath = check_filepath(filepath, cmd[0]);
-	if (execve(cmd_filepath, cmd, envp) == -1)
-		set_perror_allfree(EXIT_FAILURE, cmd, filepath, cmd_filepath);
+	make_cmd_filepath(envp, cmd);
 }
 
 void	parent_process(char **argv, char **envp, int *fd)
@@ -45,8 +49,6 @@ void	parent_process(char **argv, char **envp, int *fd)
 	int		fd_outfile;
 	int		i;
 	char	**cmd;
-	char	**filepath;
-	char	*cmd_filepath;
 
 	i = 0;
 	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -60,12 +62,7 @@ void	parent_process(char **argv, char **envp, int *fd)
 		set_perror("fd[0] dup", EXIT_FAILURE);
 	close(fd[0]);
 	cmd = get_command(&argv[3]);
-	filepath = get_filepath(envp);
-	if (filepath == NULL)
-		set_perror_allfree(EXIT_FAILURE, cmd, filepath, NULL);
-	cmd_filepath = check_filepath(filepath, cmd[0]);
-	if (execve(cmd_filepath, cmd, envp) == -1)
-		set_perror_allfree(EXIT_FAILURE, cmd, filepath, cmd_filepath);
+	make_cmd_filepath(envp, cmd);
 }
 
 int	main(int argc, char **argv, char **envp)
