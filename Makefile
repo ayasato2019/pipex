@@ -33,7 +33,6 @@ ${LIBFT}:
 clean:
 		${MAKE} -C ${LIBFT_DIR} clean
 		$(RM) $(OBJS)
-		$(RM) ${NAME}
 		$(RM) ${LIBFT}
 
 fclean:	clean
