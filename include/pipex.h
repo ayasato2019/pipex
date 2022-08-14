@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:16:23 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/09 10:04:44 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/11 18:10:47 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "libft.h"
 
 int		main(int argc, char **argv, char **envp);
-void	child_process(char **argv, char **envp, int *fd);
+void	process_1st(char **argv, char **envp, int *fd);
 void	parent_process(char **argv, char **envp, int *fd);
 char	**get_command(char **argv);
 char	**get_filepath(char **envp, char **cmb);
@@ -37,6 +37,6 @@ void	set_perror_allfree(int status, char **cnt,
 			char **cnt2, char *cnt3);
 void	set_free(char ***dst, char *src);
 void	ft_free(char **dst, char *src);
-void	make_cmd_filepath(char **envp, char **cmd);
+void	try_execve(char **envp, char **cmd);
 
 #endif

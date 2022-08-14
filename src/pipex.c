@@ -6,85 +6,59 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:11:01 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/09 10:01:49 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/15 08:06:09 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-void	make_cmd_filepath(char **envp, char **cmd)
+void	process_parents(pid_t *pid, char **envp)
 {
-	char	**filepath;
-	char	*cmd_filepath;
+	int		status;
 
-	filepath = get_filepath(envp, cmd);
-	cmd_filepath = check_filepath(filepath, cmd[0]);
-	if (execve(cmd_filepath, cmd, envp) == -1)
-		set_perror_allfree(EXIT_FAILURE, cmd, filepath, cmd_filepath);
+	if (waitpid(pid[2], &status, 0) != -1)
+	{
+		if (waitpid(pid[1], &status, 0) != -1)
+		{
+			if (waitpid(pid[0], &status, 0) != -1)
+			{
+				try_execve(envp, cmd);
+			}
+			else
+				set_perror("wait 1", EXIT_FAILURE);
+	}
+	else
+		set_perror("wait 1", EXIT_FAILURE);
 }
 
-void	child_process(char **argv, char **envp, int *fd)
+void	process_fork(int i)
 {
-	int		fd_infile;
-	int		i;
-	char	**cmd;
+	pid_t	*pid;
 
-	i = 0;
-	fd_infile = open(argv[1], O_RDONLY);
-	if (fd_infile == -1)
-		set_perror("child process infile open", EXIT_FAILURE);
-	if (dup2(fd_infile, STDIN_FILENO) == -1)
-		set_perror("child process fd[1] dup", EXIT_FAILURE);
-	close(fd_infile);
-	if (dup2(fd[1], STDOUT_FILENO) == -1)
-		set_perror("child process infile dup", EXIT_FAILURE);
-	close(fd[1]);
-	close(fd[0]);
-	cmd = get_command(&argv[2]);
-	make_cmd_filepath(envp, cmd);
-}
-
-void	parent_process(char **argv, char **envp, int *fd)
-{
-	int		fd_outfile;
-	int		i;
-	char	**cmd;
-
-	i = 0;
-	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	close(fd[1]);
-	if (fd_outfile == -1)
-		set_perror("outfile open", EXIT_FAILURE);
-	if (dup2(fd_outfile, STDOUT_FILENO) == -1)
-		set_perror("outfile dup", EXIT_FAILURE);
-	close(fd_outfile);
-	if (dup2(fd[0], STDIN_FILENO) == -1)
-		set_perror("fd[0] dup", EXIT_FAILURE);
-	close(fd[0]);
-	cmd = get_command(&argv[3]);
-	make_cmd_filepath(envp, cmd);
+	pid[i] = fork();
+	while (pid[i] <= (argc - 3))
+	{
+		if (pid == 0)
+			cmd = process_1st(argv, envp, fd_pipe);
+		else if (pid > 0)
+			process_parents(pid, envp);
+		else
+			set_perror("fork", EXIT_FAILURE);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int		fd[2];
+	int		fd_pipe[2];
 	int		status;
-	pid_t	pid;
+	int		i;
+	char	**cmd;
 
 	if (argc != 5)
 		set_perror("Bad arguments", EXIT_FAILURE);
-	if (pipe(fd) == -1)
+	if (pipe(fd_pipe) == -1)
 		set_perror("pipe", EXIT_FAILURE);
-	pid = fork();
-	if (pid == -1)
-		set_perror("fork", EXIT_FAILURE);
-	else if (pid == 0)
-		child_process(argv, envp, fd);
-	else
-	{
-		if (waitpid(pid, &status, 0) == -1)
-			set_perror("waitpid", EXIT_FAILURE);
-		parent_process(argv, envp, fd);
-	}
+	process_fork(pid_t *pid, int i);
 	return (0);
 }

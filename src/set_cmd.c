@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/09 09:43:03 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/11 22:31:56 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ int	get_status(char *file)
 	if (access(file, F_OK) == 0)
 		return (1);
 	return (-1);
+}
+
+void	try_execve(char **envp, char **cmd)
+{
+	char	**filepath;
+	char	*cmd_filepath;
+
+	filepath = get_filepath(envp, cmd);
+	cmd_filepath = check_filepath(filepath, cmd[0]);
+	if (execve(cmd_filepath, cmd, envp) == -1)
+		set_perror_allfree(EXIT_FAILURE, cmd, filepath, cmd_filepath);
 }
 
 char	*check_filepath(char **filepath, char *cmd)
@@ -76,38 +87,3 @@ char	**get_command(char **argv)
 		set_perror("error", EXIT_FAILURE);
 	return (cmd);
 }
-
-/*int	main(int argc, char **argv, char **envp)
-{
-	char	**cmd;
-	char	**filepath;
-	char	*cmd_filepath;
-	// int i;
-
-	if (!argc)
-		return 0;
-	cmd = get_command(&argv[1]);
-	filepath = get_filepath(envp);
-	if (!filepath)
-		set_perror("can not get the filepath", EXIT_FAILURE);
-	i = 0;
-	while (filepath[i])
-	{
-		printf("main filepath : %s\n", filepath[i]);
-		i++;
-	}
-	i = 0;
-	while (cmd[i])
-	{
-		printf("main cmd : %s\n", cmd[i]);
-		i++;
-	}
-	cmd_filepath = check_filepath(filepath, cmd[0]);
-	printf("cmd_filepath %s\n", cmd_filepath);
-	while (envp[i])
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
-	return (0);
-}*/
