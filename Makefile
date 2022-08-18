@@ -1,9 +1,11 @@
 NAME = pipex
 
 SRCS =	./src/pipex.c \
+		./src/list_process.c \
+		./src/connect_process.c \
 		./src/set_cmd.c \
-		./src/set_perror_exit.c \
-		./src/ft_prosess.c
+		./src/set_execve.c \
+		./src/set_perror_exit.c
 
 LIBFT = ./libft/libft.a
 
@@ -23,13 +25,13 @@ HEADER = ./include \
 all:	${NAME}
 
 ${NAME}: ${HEADER} ${LIBFT} ${OBJS}
-		$(CC) ${CFLAGS} ${LIBFT} ${OBJS} -o ${NAME}
+		$(CC) ${CFLAGS} -I${LIBFT} ${OBJS} -o ${NAME}
 
 ${LIBFT}:
 		make -C ${LIBFT_DIR}
 
 .c.o:
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I${LIBFT_DIR}
+		${CC} ${CFLAGS} -c $< -o ${<:.c=.o} 
 
 clean:
 		${MAKE} -C ${LIBFT_DIR} clean

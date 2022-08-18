@@ -6,22 +6,13 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/15 08:29:40 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/18 11:04:31 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
-int	get_status(char *file)
-{
-	if (access(file, X_OK) == 0)
-		return (0);
-	if (access(file, F_OK) == 0)
-		return (1);
-	return (-1);
-}
-
-void	try_execve(char **envp, char **cmd)
+void	make_cmd_filepath(char **envp, char **cmd)
 {
 	char	**filepath;
 	char	*cmd_filepath;
@@ -30,6 +21,15 @@ void	try_execve(char **envp, char **cmd)
 	cmd_filepath = check_filepath(filepath, cmd[0]);
 	if (execve(cmd_filepath, cmd, envp) == -1)
 		set_perror_allfree(EXIT_FAILURE, cmd, filepath, cmd_filepath);
+}
+
+int	cheack_access_status(char *file)
+{
+	if (access(file, X_OK) == 0)
+		return (0);
+	if (access(file, F_OK) == 0)
+		return (1);
+	return (-1);
 }
 
 char	*check_filepath(char **filepath, char *cmd)
@@ -43,7 +43,7 @@ char	*check_filepath(char **filepath, char *cmd)
 		temp = filepath[i];
 		filepath[i] = ft_strjoin(filepath[i], cmd);
 		free(temp);
-		if (get_status(filepath[i]) >= 0)
+		if (cheack_access_status(filepath[i]) >= 0)
 			return (filepath[i]);
 		if (filepath[i] == NULL)
 			set_perror("malloc", EXIT_FAILURE);
@@ -75,7 +75,7 @@ char	**get_filepath(char **envp, char **cmd)
 			set_perror("malloc", EXIT_FAILURE);
 		i++;
 	}
-	return (filepath);
+	return (check_filepath(filepath, *cmd));
 }
 
 char	**get_command(char **argv)

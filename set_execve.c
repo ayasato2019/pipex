@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   set_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/01 16:11:01 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/18 15:28:06 by satouaya         ###   ########.fr       */
+/*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
+/*   Updated: 2022/08/18 15:15:56 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+void	try_execve(char **envp, char **cmd)
 {
-	int		status;
-	int		i;
-	pid_t	pid;
+	char	**filepath;
+	char	*cmd_filepath;
 
-	if (argc != 5)
-		set_perror("Bad arguments", EXIT_FAILURE);
-	i = 0;
-	pid = fork();
-	if (pid == -1)
-		set_perror("fork", EXIT_FAILURE);
-	else if (pid == 0)
-		recursive_fork(argc, argv, envp, i);
-	else
-	{
-		if (waitpid(pid, &status, 0) == -1)
-			set_perror("waitpid", EXIT_FAILURE);
-	}
-	return (0);
+	filepath = get_filepath(envp, cmd);
+	cmd_filepath = check_filepath(filepath, cmd[0]);
+	if (execve(cmd_filepath, cmd, envp) == -1)
+		set_perror_allfree(EXIT_FAILURE, cmd, filepath, cmd_filepath);
 }
