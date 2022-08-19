@@ -6,11 +6,11 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/18 15:15:56 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:30:16 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 void	try_execve(char **envp, char **cmd)
 {

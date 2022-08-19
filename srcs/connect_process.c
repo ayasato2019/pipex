@@ -6,13 +6,13 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 15:15:35 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/18 15:17:01 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:29:41 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
-void	connect_infile(char **argv, char **envp, int *fd)
+void	connect_infile(char **argv)
 {
 	int		fd_infile;
 	int		i;
@@ -24,7 +24,6 @@ void	connect_infile(char **argv, char **envp, int *fd)
 	if (dup2(fd_infile, STDIN_FILENO) == -1)
 		set_perror("child process fd[1] dup", EXIT_FAILURE);
 	close(fd_infile);
-	return (0);
 }
 
 void	connect_pipe(int *fd)

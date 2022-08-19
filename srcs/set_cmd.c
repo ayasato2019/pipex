@@ -6,11 +6,11 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/18 11:04:31 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/19 20:21:03 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 void	make_cmd_filepath(char **envp, char **cmd)
 {
@@ -49,7 +49,7 @@ char	*check_filepath(char **filepath, char *cmd)
 			set_perror("malloc", EXIT_FAILURE);
 		i++;
 	}
-	return (ft_strdup("-1"));
+	return (NULL);
 }
 
 char	**get_filepath(char **envp, char **cmd)
@@ -75,7 +75,7 @@ char	**get_filepath(char **envp, char **cmd)
 			set_perror("malloc", EXIT_FAILURE);
 		i++;
 	}
-	return (check_filepath(filepath, *cmd));
+	return (filepath);
 }
 
 char	**get_command(char **argv)
