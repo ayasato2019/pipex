@@ -1,11 +1,10 @@
-NAME		= pipex
+NAME = pipex
 
-SRCS		=	srcs/pipex.c \
-				srcs/list_process.c \
-				srcs/connect_process.c \
-				srcs/set_cmd.c \
-				srcs/set_execve.c \
-				srcs/set_perror_exit.c
+SRCS =	./srcs/main.c \
+		./srcs/list_process.c \
+		./srcs/check_cmd.c \
+		./srcs/check_filepath.c \
+		./srcs/set_perror_exit.c
 
 LIBFT = ./libft/libft.a
 
@@ -17,18 +16,18 @@ CC		= cc
 
 RM		= rm -f
 
-CFLAGS	= -Wall -Wextra -Werror
+HEADER = ./include/ \
+		./libft/
 
-HEADER = ./include \
-		./libft
+CFLAGS	= -Wall -Wextra -Werror
 
 all:	${NAME}
 
-${NAME}: ${HEADER} ${LIBFT} ${OBJS}
-		$(CC) ${CFLAGS} ${LIBFT} ${OBJS} -o ${NAME}
-
 ${LIBFT}:
 		make -C ${LIBFT_DIR}
+
+${NAME}: ${HEADER} ${LIBFT} ${OBJS}
+		$(CC) ${CFLAGS} ${LIBFT} ${OBJS} -o ${NAME}
 
 .c.o:
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I${LIBFT_DIR}

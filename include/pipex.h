@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:16:23 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/19 20:29:11 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/20 16:05:10 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,16 @@
 int		main(int argc, char **argv, char **envp);
 
 //list_process.c
-void	process_cmd1(int fd[2], char **argv, char **envp, char **cmd_1);
-void	process_cmd2(int fd[2], char **argv, char **envp, char **cmd_2);
-void	recursive_fork(int argc, char **argv, char **envp, int i);
+void	child_process(char **argv, char **envp, int *fd);
+void	parent_process(char **argv, char **envp, int *fd);
 
-//connect_process.c
-void	connect_infile(char **argv);
-void	connect_pipe(int *fd);
-void	connect_outfile(char **argv, int *fd);
-
-//set_cmd.c
-void	make_cmd_filepath(char **envp, char **cmd);
-int	cheack_access_status(char *file);
-char	*check_filepath(char **filepath, char *cmd);
-char	**get_filepath(char **envp, char **cmd);
+//check_cmd.c
 char	**get_command(char **argv);
 
-//set_exceve.c
-void	try_execve(char **envp, char **cmd);
+//check_filepath.c
+char	**get_filepath(char **envp, char **cmb);
+char	*check_filepath(char **filepath, char *cmd);
+int		get_status(char *file);
 
 //set_perror_exit.c
 void	set_perror(char *cmt, int status);
@@ -55,6 +47,5 @@ void	set_perror_allfree(int status, char **cnt,
 void	set_free(char ***dst, char *src);
 void	ft_free(char **dst, char *src);
 void	make_cmd_filepath(char **envp, char **cmd);
-
 
 #endif
