@@ -6,11 +6,11 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 04:52:17 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/20 15:26:17 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:15:46 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
 char	**get_command(char **argv)
 {

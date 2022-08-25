@@ -6,19 +6,25 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `srcs/main.o', needed by `pipex'.  Stop.
 
-# Make data base, printed on Wed Aug  3 20:55:19 2022
+
+# Make data base, printed on Thu Aug 25 08:36:47 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
+ 
 PIPENV_PYTHON = /Users/satouaya/.pyenv/shims/python
 # automatic
 ?F = $(notdir $?)
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
+# makefile (from `Makefile', line 13)
+INCLUDES = -I ./include -I ${LIBFT_DIR}
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -27,14 +33,14 @@ PIPENV_PYTHON = /Users/satouaya/.pyenv/shims/python
 CURDIR := /Users/satouaya/42Tokyo/42/Pipex/github
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 15)
-RM = rm -f
 # environment
-VSCODE_NLS_CONFIG = {"locale":"ja","availableLanguages":{"*":"ja"},"_languagePackId":"29207410cd77a70b4b25e4878dda93be.ja","_translationsConfigFile":"/Users/satouaya/Library/Application Support/Code/clp/29207410cd77a70b4b25e4878dda93be.ja/tcf.json","_cacheRoot":"/Users/satouaya/Library/Application Support/Code/clp/29207410cd77a70b4b25e4878dda93be.ja","_resolvedLanguagePackCoreLocation":"/Users/satouaya/Library/Application Support/Code/clp/29207410cd77a70b4b25e4878dda93be.ja/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a","_corruptedFile":"/Users/satouaya/Library/Application Support/Code/clp/29207410cd77a70b4b25e4878dda93be.ja/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"ja","availableLanguages":{"*":"ja"},"_languagePackId":"e6c586e25df759b7fd1d7a26b78d86d4.ja","_translationsConfigFile":"/Users/satouaya/Library/Application Support/Code/clp/e6c586e25df759b7fd1d7a26b78d86d4.ja/tcf.json","_cacheRoot":"/Users/satouaya/Library/Application Support/Code/clp/e6c586e25df759b7fd1d7a26b78d86d4.ja","_resolvedLanguagePackCoreLocation":"/Users/satouaya/Library/Application Support/Code/clp/e6c586e25df759b7fd1d7a26b78d86d4.ja/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a","_corruptedFile":"/Users/satouaya/Library/Application Support/Code/clp/e6c586e25df759b7fd1d7a26b78d86d4.ja/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 17)
+# makefile (from `Makefile', line 16)
 CFLAGS = -Wall -Wextra -Werror
+# makefile (from `Makefile', line 3)
+SRCS_NAME = main.c list_process.c check_cmd.c check_filepath.c set_perror_exit.c
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
@@ -51,15 +57,15 @@ ELECTRON_RUN_AS_NODE = 1
 PYENV_ROOT = /Users/satouaya/.pyenv/shims
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
-# makefile (from `Makefile', line 9)
+# makefile (from `Makefile', line 11)
 LIBFT_DIR = ./libft
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.wqJPv0ew1f/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.5NRLwHgIbG/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.PCG2ydxLNO/org.xquartz:0
-# makefile (from `Makefile', line 11)
+DISPLAY = /private/tmp/com.apple.launchd.LU2PyEBmkz/org.xquartz:0
+# makefile (from `Makefile', line 9)
 OBJS = ${SRCS:.c=.o}
 # environment
 PWD = /Users/satouaya/42Tokyo/42/Pipex/github
@@ -91,13 +97,13 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 3)
-SRCS = ./src/pipex.c ./src/set_cmd.c ./src/set_perror_exit.c
+# makefile (from `Makefile', line 8)
+SRCS = ${addprefix ${SRC_DIR}/, ${SRCS_NAME}}
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 7)
-LIBFT = ./libft/libft.a
-# makefile (from `Makefile', line 13)
+# makefile (from `Makefile', line 12)
+LIBFT = ${LIBFT_DIR}/libft.a
+# makefile (from `Makefile', line 15)
 CC = cc
 # default
 MAKE_VERSION := 3.81
@@ -143,12 +149,12 @@ __CF_USER_TEXT_ENCODING = 0x1F5:0x1:0xE
 COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
+# makefile (from `Makefile', line 2)
+SRC_DIR = ./srcs
 # automatic
 <F = $(notdir $<)
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 19)
-HEADER = ./include ./libft
 # automatic
 ^F = $(notdir $^)
 # default
@@ -160,9 +166,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2168
+VSCODE_PID = 2149
 # variable set hash-table stats:
-# Load=75/1024=7%, Rehash=0, Collisions=6/109=6%
+# Load=76/1024=7%, Rehash=0, Collisions=6/110=5%
 
 # Pattern-specific Variable Values
 
@@ -170,9 +176,9 @@ VSCODE_PID = 2168
 
 # Directories
 
-# . (device 16777233, inode 96880692): 8 files, no impossibilities.
+# . (device 16777230, inode 96880692): 13 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -180,29 +186,25 @@ VSCODE_PID = 2168
 
 # Files
 
+# Not a target:
+srcs/list_process.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 all: pipex
 #  Phony target (prerequisite of .PHONY).
 #  Command-line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
+#  File has not been updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 .PHONY: all clean fclean re .c.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-# Not a target:
-libft:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-03 17:13:25
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .SUFFIXES:
@@ -213,58 +215,17 @@ libft:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-02 11:47:26
+#  Last modified 2022-08-22 18:23:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-include:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-31 16:02:05
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-src/pipex.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/set_cmd.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := libft/libft.a
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := 
-# automatic
-# | := 
-# automatic
-# < := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/11=18%
-#  commands to execute (from `Makefile', line 28):
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 24):
 	make -C ${LIBFT_DIR}
 	
 
@@ -273,8 +234,9 @@ libft/libft.a:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 31):
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I${LIBFT_DIR}
+#  commands to execute (from `Makefile', line 27):
+ 
+	${CC} ${CFLAGS} $< -c ${INCLUDES} -o $@
 	
 
 fclean: clean
@@ -282,10 +244,22 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 40):
+#  commands to execute (from `Makefile', line 34):
 	${MAKE} -C ${LIBFT_DIR} fclean
 	$(RM) ${NAME}
 	
+
+# Not a target:
+srcs/set_perror_exit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/check_filepath.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -304,33 +278,37 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
- 
-#  commands to execute (from `Makefile', line 34):
+#  commands to execute (from `Makefile', line 30):
 	${MAKE} -C ${LIBFT_DIR} clean
 	$(RM) $(OBJS)
-	$(RM) ${NAME}
-	$(RM) ${LIBFT}
 	
 
 # Not a target:
-src/set_perror_exit.o:
+srcs/check_cmd.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-pipex: include libft libft/libft.a src/pipex.o src/set_cmd.o src/set_perror_exit.o
+# Not a target:
+srcs/main.o:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+pipex: srcs/main.o srcs/list_process.o srcs/check_cmd.o srcs/check_filepath.o srcs/set_perror_exit.o libft/libft.a
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
+#  File has not been updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
-#  commands to execute (from `Makefile', line 25):
-	$(CC) ${CFLAGS} ${LIBFT} ${OBJS} -o ${NAME}
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 21):
+	${CC} ${CFLAGS} ${OBJS} ${LIBFT} ${INCLUDES} -o $@
 	
 
 # files hash-table stats:
-# Load=16/1024=2%, Rehash=0, Collisions=0/45=0%
+# Load=16/1024=2%, Rehash=0, Collisions=0/44=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -342,6 +320,6 @@ pipex: include libft libft/libft.a src/pipex.o src/set_cmd.o src/set_perror_exit
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Aug  3 20:55:19 2022
+# Finished Make data base on Thu Aug 25 08:36:47 2022
 
  

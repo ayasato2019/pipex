@@ -6,11 +6,11 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:38:49 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/20 15:26:30 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/22 10:15:34 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
 void	set_free(char ***dst, char *src)
 {

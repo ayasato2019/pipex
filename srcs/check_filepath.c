@@ -6,11 +6,11 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 20:56:19 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/20 15:26:20 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:39:30 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
 void	make_cmd_filepath(char **envp, char **cmd)
 {
@@ -20,7 +20,7 @@ void	make_cmd_filepath(char **envp, char **cmd)
 	filepath = get_filepath(envp, cmd);
 	cmd_filepath = check_filepath(filepath, cmd[0]);
 	if (execve(cmd_filepath, cmd, envp) == -1)
-		set_perror_allfree(EXIT_FAILURE, cmd, filepath, cmd_filepath);
+		set_perror_allfree(-1, cmd, filepath, cmd_filepath);
 }
 
 int	get_status(char *file)
@@ -46,7 +46,7 @@ char	*check_filepath(char **filepath, char *cmd)
 		if (get_status(filepath[i]) >= 0)
 			return (filepath[i]);
 		if (filepath[i] == NULL)
-			set_perror("malloc", EXIT_FAILURE);
+			set_perror("malloc", -1);
 		i++;
 	}
 	return (ft_strdup("-1"));
@@ -62,17 +62,17 @@ char	**get_filepath(char **envp, char **cmd)
 	while (ft_strncmp(*envp, "PATH=", 5))
 		envp++;
 	if (!*envp)
-		set_perror("get_filepath strncmp", EXIT_FAILURE);
+		set_perror("get_filepath strncmp", -1);
 	filepath = ft_split((*envp) + 5, ':');
 	while (filepath[i])
 	{
 		temp = filepath[i];
 		filepath[i] = ft_strjoin(filepath[i], "/");
 		if (filepath[i] == NULL)
-			set_perror_allfree(EXIT_FAILURE, cmd, filepath, NULL);
+			set_perror_allfree(-1, cmd, filepath, NULL);
 		free(temp);
 		if (filepath[i] == NULL)
-			set_perror("malloc", EXIT_FAILURE);
+			set_perror("malloc", -1);
 		i++;
 	}
 	return (filepath);

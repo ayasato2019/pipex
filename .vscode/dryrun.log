@@ -1,10 +1,11 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/satouaya/42Tokyo/42/Pipex/github'
+cc -Wall -Wextra -Werror srcs/main.c -c -I ./include -I ./libft -o srcs/main.o
+cc -Wall -Wextra -Werror srcs/list_process.c -c -I ./include -I ./libft -o srcs/list_process.o
+cc -Wall -Wextra -Werror srcs/check_cmd.c -c -I ./include -I ./libft -o srcs/check_cmd.o
+cc -Wall -Wextra -Werror srcs/check_filepath.c -c -I ./include -I ./libft -o srcs/check_filepath.o
+cc -Wall -Wextra -Werror srcs/set_perror_exit.c -c -I ./include -I ./libft -o srcs/set_perror_exit.o
 make -C ./libft
- 
-cc -Wall -Wextra -Werror -c src/pipex.c -o src/pipex.o -I./libft
-cc -Wall -Wextra -Werror -c src/set_cmd.c -o src/set_cmd.o -I./libft
-cc -Wall -Wextra -Werror -c src/set_perror_exit.c -o src/set_perror_exit.o -I./libft
-cc -Wall -Wextra -Werror ./libft/libft.a ./src/pipex.o ./src/set_cmd.o ./src/set_perror_exit.o -o pipex
+cc -Wall -Wextra -Werror ./srcs/main.o ./srcs/list_process.o ./srcs/check_cmd.o ./srcs/check_filepath.o ./srcs/set_perror_exit.o ./libft/libft.a -I ./include -I ./libft -o pipex
 make: Leaving directory `/Users/satouaya/42Tokyo/42/Pipex/github'
  

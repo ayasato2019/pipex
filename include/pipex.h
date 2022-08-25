@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:16:23 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/20 16:05:10 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/24 22:59:24 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,21 @@
 # include <fcntl.h>
 # include "libft.h"
 
+
+enum e_pipefd
+{
+	READ,
+	WRITE,
+};
+
 //main.c
 int		main(int argc, char **argv, char **envp);
 
 //list_process.c
-void	child_process(char **argv, char **envp, int *fd);
-void	parent_process(char **argv, char **envp, int *fd);
+void	first_process(char **argv, int *fd);
+void	middle_process(int *fd);
+void	last_process(char **argv, int *fd);
+void	recursive_fork(int argc, char **argv, char **envp, int i);
 
 //check_cmd.c
 char	**get_command(char **argv);
