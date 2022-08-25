@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:16:23 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/25 22:22:02 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/25 22:37:38 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, char **argv, char **envp);
 //list_process.c
 void	first_process(char **argv, char **envp, int *fd);
 void	last_process(char **argv, char **envp, int *fd);
-void	recursive_fork(char **argv, char **envp, int *fd, int i);
+void	recursive_fork(char **argv, char **envp, int *fd);
 
 //check_cmd.c
 char	**get_command(char **argv);

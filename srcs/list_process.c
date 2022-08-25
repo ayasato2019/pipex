@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 16:11:01 by aysato            #+#    #+#             */
-/*   Updated: 2022/08/25 22:29:30 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/25 22:41:09 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,34 +50,20 @@ void	last_process(char **argv, char **envp, int *fd)
 	make_cmd_filepath(envp, cmd);
 }
 
-void	recursive_fork(char **argv, char **envp, int *fd, int i)
+void	recursive_fork(char **argv, char **envp, int *fd)
 {
-	int		fd2[2];
 	pid_t	pid2;
 
-	if (pipe(fd2) == -1)
-		set_perror("pipe", EXIT_FAILURE);
 	pid2 = fork();
 	if (pid2 == -1)
 		set_perror("fork", EXIT_FAILURE);
 	if (pid2 == 0)
-	{
-		if (i == 0)
-			first_process(argv, envp, fd);
-		else if (i == 1)
-		{
-			last_process(argv, envp, fd2);
-			printf("%s\n", "通過");
-			
-		}
-		i++;
-		recursive_fork(argv, envp, fd, i);
-	}
+		last_process(argv, envp, fd);
 	else
 	{
-		close(fd2[WRITE]);
-		if (dup2(fd2[READ], STDIN_FILENO) == -1)
+		close(fd[WRITE]);
+		if (dup2(fd[READ], STDIN_FILENO) == -1)
 			set_perror("fd[REAS] dup", EXIT_FAILURE);
-		close(fd2[READ]);
+		close(fd[READ]);
 	}
 }
