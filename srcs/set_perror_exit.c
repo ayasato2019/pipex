@@ -6,7 +6,7 @@
 /*   By: satouaya <satouaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 21:38:49 by satouaya          #+#    #+#             */
-/*   Updated: 2022/08/22 10:15:34 by satouaya         ###   ########.fr       */
+/*   Updated: 2022/08/26 22:05:09 by satouaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	set_perror(char *cmt, int status)
 void	set_perror_allfree(int status, char **cnt,
 			char **cnt2, char *cnt3)
 {
-	int		i;
-
-	i = 0;
 	perror("execve");
 	set_free(&cnt, NULL);
 	set_free(&cnt2, NULL);
