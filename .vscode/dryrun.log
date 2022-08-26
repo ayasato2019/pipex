@@ -1,6 +1,7 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/satouaya/42Tokyo/42/Pipex/github'
 cc -Wall -Wextra -Werror srcs/main.c -c -I ./include -I ./libft -o srcs/main.o
+ 
 cc -Wall -Wextra -Werror srcs/list_process.c -c -I ./include -I ./libft -o srcs/list_process.o
 cc -Wall -Wextra -Werror srcs/check_cmd.c -c -I ./include -I ./libft -o srcs/check_cmd.o
 cc -Wall -Wextra -Werror srcs/check_filepath.c -c -I ./include -I ./libft -o srcs/check_filepath.o
